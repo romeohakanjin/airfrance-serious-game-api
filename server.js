@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // Routes
-app.use('/api', require('./routes/api'));
+app.use('/', require('./routes/api'));
 
 // Start server
 app.listen(process.env.PORT || 1000, () => console.log("Everything O.K"));
