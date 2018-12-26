@@ -6,9 +6,9 @@ var mongoose = restful.mongoose;
 var aeroportSchema = new mongoose.Schema({
     _id: String,
     name: String,
-    terminals: {[
+    terminals: [{
         name: String
-        ]}
+        }]
 });
 
 // return models
