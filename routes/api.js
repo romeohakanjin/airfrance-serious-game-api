@@ -10,6 +10,7 @@ var aeroports = require('../models/aeroports');
 agents.methods(['get', 'post', 'put', 'delete']);
 agents.register(router, '/agents');
 
+//aeroports
 aeroports.methods(['get', 'post', 'put', 'delete']);
 aeroports.register(router, '/aeroports');
 

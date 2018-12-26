@@ -2,7 +2,7 @@
 var restful = require('node-restful');
 var mongoose = restful.mongoose;
 
-// aeroports
+// aeroports schema
 var aeroportSchema = new mongoose.Schema({
     _id: String,
     name: String,
