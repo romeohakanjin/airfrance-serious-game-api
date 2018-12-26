@@ -4,11 +4,14 @@ var router = express.Router();
 
 // Get models
 var agents = require('../models/agents');
+var aeroports = require('../models/aeroports');
 
 // Routes
 agents.methods(['get', 'post', 'put', 'delete']);
 agents.register(router, '/agents');
-agents.register(router, '/checkAgentsSession');
+
+aeroports.methods(['get', 'post', 'put', 'delete']);
+aeroports.register(router, '/aeroports');
 
 // Return router
 module.exports = router;
