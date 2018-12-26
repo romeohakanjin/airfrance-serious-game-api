@@ -4,7 +4,6 @@ var mongoose = restful.mongoose;
 
 // aeroports
 var aeroportSchema = new mongoose.Schema({
-    id: String,
     name: String,
     terminals: [{
         name: String
