@@ -21,7 +21,20 @@ var aeroportSchema = new mongoose.Schema({
     name: String,
     terminals: [{
         name: String
-        }]
+        }],
+    flight: {
+    num_flight: Number,
+    destination: String,
+    departure_time: String,
+    arrival_time: String,
+    departure_date: String,
+    terminal: String,
+    escale: {
+    	departure_time: String,
+    	destination: String,
+    	arrival_time: String,
+    	place_departure: String
+    },
 });
 
 var Aeroports = mongoose.model('Aeroport', aeroportSchema);
@@ -53,7 +66,7 @@ router.route('/aeroports/:name')
 router.route('/aeroports/:name/:terminal')
 .get(function(req,res){ 
         //Mongoose prévoit une fonction pour la recherche d'un document par son identifiant
-        Aeroports.find({"name": req.params.name, "terminals.name": req.params.terminal}, function(err, aeroports) {
+        Aeroports.find({"name": req.params.name, "terminals.name": req.params.terminal, 'flight': { $exists: false }}, function(err, aeroports) {
         if (err)
             res.send(err);
         res.json(aeroports);
