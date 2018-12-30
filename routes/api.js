@@ -74,15 +74,15 @@ router.route('/aeroports/:name/:terminal')
     });
 });
 
-/*router.route('/aeroports/flights/:name')
+router.route('/aeroports/flights/:name/:terminal')
 .get(function(req,res){ 
-            //Mongoose prévoit une fonction pour la recherche d'un document par son identifiant
-            Aeroports.find({name: req.params.name}, function(err, aeroports) {
-            if (err)
-                res.send(err);
-            res.json(aeroports);
-        });
-});*/
+        //Mongoose prévoit une fonction pour la recherche d'un document par son identifiant
+        Aeroports.find({"name": req.params.name, "terminals.name": req.params.terminal, 'flight': { $exists: true }}, function(err, aeroports) {
+        if (err)
+            res.send(err);
+        res.json(aeroports);
+    });
+});
 
 // Return router
 module.exports = router;
