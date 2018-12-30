@@ -1,11 +1,11 @@
 // Dependencies
 var express = require('express');
+var restful = require('node-restful');
 var mongoose = require('mongoose');
 var router = express.Router();
 
 // Get models
 var agents = require('../models/agents');
-var aeroports = require('../models/aeroports');
 
 // Routes
 agents.methods(['get', 'post', 'put', 'delete']);
@@ -15,7 +15,16 @@ agents.register(router, '/agents');
 //aeroports.methods(['get', 'post', 'put', 'delete']);
 //aeroports.register(router, '/aeroports');
 
-var Aeroports = mongoose.model('Aeroport', aeroports);
+// aeroports schema
+var aeroportSchema = new mongoose.Schema({
+    _id: String,
+    name: String,
+    terminals: [{
+        name: String
+        }]
+});
+
+var Aeroports = mongoose.model('Aeroport', aeroportSchema);
 router.route('/aeroports')
 
 // J'implémente les méthodes GET, PUT, UPDATE et DELETE
