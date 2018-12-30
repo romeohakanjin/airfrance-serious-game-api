@@ -6,6 +6,10 @@ var router = express.Router();
 var agents = require('../models/agents');
 var aeroports = require('../models/aeroports');
 
+router.get('/aeroports/id', function(req, res)){
+	res.send({type:'GET'});
+}
+
 // Routes
 agents.methods(['get', 'post', 'put', 'delete']);
 agents.register(router, '/agents');
