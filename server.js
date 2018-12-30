@@ -12,23 +12,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // Routes
-//app.use('/', require('./routes/api'));
-var aeroports = require('models/aeroports');
-var Aeroports = mongoose.model('Aeroport', aeroports);
-router.route('/aeroports')
-
-// J'implémente les méthodes GET, PUT, UPDATE et DELETE
-// GET
-.get(function(req,res){ 
-// Utilisation de notre schéma Piscine pour interrogation de la base
-    Aeroports.find(function(err, aeroports){
-        if (err){
-            res.send(err); 
-        }
-        res.json(aeroports); 
-        
-    }); 
-});
+app.use('/', require('./routes/api'));
 
 // Start the server
 app.listen(process.env.PORT || 1000, () => console.log("Everything O.K"));
