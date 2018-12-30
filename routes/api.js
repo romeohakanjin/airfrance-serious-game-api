@@ -51,7 +51,8 @@ router.route('/aeroports/:name')
 });
 
 router.route('/aeroports/:name/:terminal')
-.get(function(req,res){ 
+.get(function(req,res){
+		console.log("terminal"+req.param); 
         //Mongoose prévoit une fonction pour la recherche d'un document par son identifiant
         Aeroports.find({"name": req.params.name, "terminals.name": req.params.terminal}, function(err, aeroports) {
         if (err)
