@@ -15,8 +15,8 @@ agents.register(router, '/agents');
 //aeroports.register(router, '/aeroports');
 
 var Aeroports = mongoose.model('Aeroport', aeroports);
-
 router.route('/aeroports')
+
 // J'implémente les méthodes GET, PUT, UPDATE et DELETE
 // GET
 .get(function(req,res){ 
