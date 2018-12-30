@@ -40,10 +40,10 @@ router.route('/aeroports')
     }); 
 });
 
-router.route('/aeroports/:name')
+router.route('/aeroports/:namee')
 .get(function(req,res){ 
             //Mongoose prévoit une fonction pour la recherche d'un document par son identifiant
-            Aeroports.findById(req.params.name, function(err, aeroports) {
+            Aeroports.findById(req.params.namee, function(err, aeroports) {
             if (err)
                 res.send(err);
             res.json(aeroports);
