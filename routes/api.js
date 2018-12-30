@@ -21,20 +21,21 @@ var aeroportSchema = new mongoose.Schema({
     name: String,
     terminals: [{
         name: String
-        }],
+    }],
     flight: {
-    num_flight: Number,
-    destination: String,
-    departure_time: String,
-    arrival_time: String,
-    departure_date: String,
-    terminal: String,
-    escale: {
-    	departure_time: String,
-    	destination: String,
-    	arrival_time: String,
-    	place_departure: String
-    },
+		num_flight: Number,
+		destination: String,
+		departure_time: String,
+		arrival_time: String,
+		departure_date: String,
+		terminal: String,
+		escale: {
+			departure_time: String,
+			destination: String,
+			arrival_time: String,
+			place_departure: String
+		}
+	}
 });
 
 var Aeroports = mongoose.model('Aeroport', aeroportSchema);
