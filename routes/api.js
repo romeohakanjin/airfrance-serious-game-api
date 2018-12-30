@@ -10,13 +10,5 @@ router.get('/aeroports/:name', function(req, res)){
 	res.send({type:'GET'});
 }
 
-// Routes
-agents.methods(['get', 'post', 'put', 'delete']);
-agents.register(router, '/agents');
-
-//aeroports
-aeroports.methods(['get', 'post', 'put', 'delete']);
-aeroports.register(router, '/aeroports');
-
 // Return router
 module.exports = router;
