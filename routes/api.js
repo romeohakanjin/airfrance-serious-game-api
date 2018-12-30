@@ -27,7 +27,7 @@ router.route('/aeroports')
         }
         res.json(aeroports); 
         
-    }; 
+    }); 
 }
 
 // Return router
