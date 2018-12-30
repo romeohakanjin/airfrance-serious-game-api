@@ -25,8 +25,8 @@ var aeroportSchema = new mongoose.Schema({
 });
 
 var Aeroports = mongoose.model('Aeroport', aeroportSchema);
-router.route('/aeroports')
 
+router.route('/aeroports')
 // J'implémente les méthodes GET, PUT, UPDATE et DELETE
 // GET
 .get(function(req,res){ 
@@ -38,6 +38,16 @@ router.route('/aeroports')
         res.json(aeroports); 
         
     }); 
+});
+
+router.route('/aeroports/:name')
+.get(function(req,res){ 
+            //Mongoose prévoit une fonction pour la recherche d'un document par son identifiant
+            Aeroports.findById(req.params.name, function(err, aeroports) {
+            if (err)
+                res.send(err);
+            res.json(aeroports);
+        });
 });
 
 // Return router
