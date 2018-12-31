@@ -34,23 +34,23 @@ var aeroportSchema = new mongoose.Schema({
 			place_departure: String
 		},
 		passenger: [{
-    	reference_number: Number,
-		last_name: String,
-    	first_name: String,
-    	address: String,
-    	mobile: String,
-    	mail: String,
-      	status: {
-          wording: String
-        },
-          luggage: {
-            number: Number
-          }
-    }],
-    incident: [{
-      type: String,
-      description: String
-    }]
+        	reference_number: Number,
+    		last_name: String,
+        	first_name: String,
+        	address: String,
+        	mobile: String,
+        	mail: String,
+          	status: {
+              wording: String
+            },
+            luggage: {
+                number: Number
+            }
+        }],
+        incident: [{
+          type: String,
+          description: String
+        }]
 	}
 });
 
@@ -126,7 +126,7 @@ router.route('/aeroports/flights/:name/:terminal')
 
 router.route('/passenger/:num_flight')
 .get(function(req,res){ 
-        Aeroports.find({"fligh.num_flight": req.params.num_flight}, function(err, aeroports) {
+        Aeroports.find({"flight.num_flight": req.params.num_flight}, function(err, aeroports) {
         //Aeroports.find({"flight": {"num_flight": req.params.num_flight}}, function(err, aeroports) {
         if (err)
             res.send(err);
