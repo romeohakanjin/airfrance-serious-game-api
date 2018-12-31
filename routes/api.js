@@ -90,6 +90,7 @@ router.route('/aeroports/:name')
     });
 });
 
+// get the list of only aeroports registred
 router.route('/aeroports/:name/:terminal')
 .get(function(req,res){ 
         Aeroports.find({"name": req.params.name, "terminals.name": req.params.terminal, 'flight': { $exists: false }}, function(err, aeroports) {
@@ -99,6 +100,7 @@ router.route('/aeroports/:name/:terminal')
     });
 });
 
+// get the list of aeroports with fligths registred
 router.route('/aeroports/flights/:name/:terminal')
 .get(function(req,res){ 
         Aeroports.find({"name": req.params.name, "terminals.name": req.params.terminal, 'flight': { $exists: true }}, function(err, aeroports) {
@@ -111,9 +113,9 @@ router.route('/aeroports/flights/:name/:terminal')
 /**
 * Passenger Query
 **/
-router.route('/aeroports/flights/passenger/:name')
+router.route('/aeroports/flights/passenger/:name/:terminal')
 .get(function(req,res){ 
-        Aeroports.find({"name": req.params.name, 'flight': { $exists: true }}, function(err, aeroports) {
+        Aeroports.find({"name": req.params.name, "terminals.name": req.params.terminal, 'flight': { $exists: true }}, function(err, aeroports) {
         if (err)
             res.send(err);
         res.json(aeroports);
