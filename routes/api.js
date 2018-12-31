@@ -57,7 +57,7 @@ var aeroportSchema = new mongoose.Schema({
 var Aeroports = mongoose.model('Aeroport', aeroportSchema);
 var Agents = mongoose.model('Agent', agentsSchema);
 
-// agents query
+// agents
 router.route('/agents')
 .get(function(req,res){ 
     Agents.find(function(err, agents){
@@ -80,7 +80,7 @@ router.route('/agents/:registration_number/:password')
     }); 
 });
 
-// aeroports query
+// aeroports
 router.route('/aeroports/:name')
 .get(function(req,res){ 
         //Mongoose prévoit une fonction pour la recherche d'un document par son identifiant

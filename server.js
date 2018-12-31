@@ -16,4 +16,4 @@ app.use('/', require('./routes/api'));
 
 // Start the server
 app.listen(process.env.PORT || 1000, () => console.log("Everything O.K"));
-console.log('Server running on port : 1000');
+console.log('Server running on port: 1000');
