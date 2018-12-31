@@ -111,6 +111,15 @@ router.route('/aeroports/flights/:name/:terminal')
 /**
 * Passenger Query
 **/
+router.route('/aeroports/flights/passenger')
+.get(function(req,res){ 
+        Aeroports.find({"flight": { $exists: true }}, function(err, aeroports) {
+        if (err)
+            res.send(err);
+        res.json(aeroports);
+    });
+});
+
 router.route('/aeroports/flights/:num_flight')
 .get(function(req,res){ 
         Aeroports.find({"flight": {"num_flight": req.params.num_flight}}, function(err, aeroports) {
