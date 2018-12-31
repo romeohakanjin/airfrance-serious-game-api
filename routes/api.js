@@ -4,16 +4,14 @@ var restful = require('node-restful');
 var mongoose = require('mongoose');
 var router = express.Router();
 
-// Get models
-var agents = require('../models/agents');
-
-// Routes
-agents.methods(['get', 'post', 'put', 'delete']);
-agents.register(router, '/agents');
-
-//aeroports
-//aeroports.methods(['get', 'post', 'put', 'delete']);
-//aeroports.register(router, '/aeroports');
+// agents
+var agentsSchema = new mongoose.Schema({
+	_id: String,
+	first_name: String,
+	last_name: String,
+	registration_number: Number,
+	password: Number
+});
 
 // aeroports schema
 var aeroportSchema = new mongoose.Schema({
@@ -34,26 +32,55 @@ var aeroportSchema = new mongoose.Schema({
 			destination: String,
 			arrival_time: String,
 			place_departure: String
-		}
+		},
+		passenger: [{
+    	reference_number: Number,
+		last_name: String,
+    	first_name: String,
+    	address: String,
+    	mobile: String,
+    	mail: String,
+      	status: {
+          wording: String
+        },
+          luggage: {
+            number: Number
+          }
+    }],
+    incident: [{
+      type: String,
+      description: String
+    }]
 	}
 });
 
 var Aeroports = mongoose.model('Aeroport', aeroportSchema);
+var Agents = mongoose.model('Agent', agentsSchema);
 
-router.route('/aeroports')
-// J'implémente les méthodes GET, PUT, UPDATE et DELETE
-// GET
+// agents query
+router.route('/agents')
 .get(function(req,res){ 
-// Utilisation de notre schéma Piscine pour interrogation de la base
-    Aeroports.find(function(err, aeroports){
+    Agents.find(function(err, agents){
         if (err){
             res.send(err); 
         }
-        res.json(aeroports); 
+        res.json(agents); 
         
     }); 
 });
 
+router.route('/agents/:registration_number/:password')
+.get(function(req,res){ 
+    Agents.find({"registration_number": req.params.registration_number, "password": req.params.password},function(err, agents){
+        if (err){
+            res.send(err); 
+        }
+        res.json(agents); 
+        
+    }); 
+});
+
+// aeroports query
 router.route('/aeroports/:name')
 .get(function(req,res){ 
         //Mongoose prévoit une fonction pour la recherche d'un document par son identifiant
