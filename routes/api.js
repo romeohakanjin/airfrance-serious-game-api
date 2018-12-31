@@ -111,5 +111,18 @@ router.route('/aeroports/flights/:name/:terminal')
     });
 });
 
+/**
+* Passenger Query
+**/
+
+router.route('/aeroports/flight/passenger/:num_flight')
+.get(function(req,res){
+    Aeroports.find('flight.num_flight': req.params.num_flight, function(err, aeroports){
+        if(err)
+            res.send(err);
+        res.json(aeroports);
+    })
+});
+
 // Return router
 module.exports = router;
