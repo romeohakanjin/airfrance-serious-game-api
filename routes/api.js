@@ -83,7 +83,6 @@ router.route('/agents/:registration_number/:password')
 // aeroports query
 router.route('/aeroports/:name')
 .get(function(req,res){ 
-        //Mongoose prévoit une fonction pour la recherche d'un document par son identifiant
         Aeroports.find({"name": req.params.name}, function(err, aeroports) {
         if (err)
             res.send(err);
@@ -93,7 +92,6 @@ router.route('/aeroports/:name')
 
 router.route('/aeroports/:name/:terminal')
 .get(function(req,res){ 
-        //Mongoose prévoit une fonction pour la recherche d'un document par son identifiant
         Aeroports.find({"name": req.params.name, "terminals.name": req.params.terminal, 'flight': { $exists: false }}, function(err, aeroports) {
         if (err)
             res.send(err);
@@ -103,7 +101,6 @@ router.route('/aeroports/:name/:terminal')
 
 router.route('/aeroports/flights/:name/:terminal')
 .get(function(req,res){ 
-        //Mongoose prévoit une fonction pour la recherche d'un document par son identifiant
         Aeroports.find({"name": req.params.name, "terminals.name": req.params.terminal, 'flight': { $exists: true }}, function(err, aeroports) {
         if (err)
             res.send(err);
@@ -114,11 +111,10 @@ router.route('/aeroports/flights/:name/:terminal')
 /**
 * Passenger Query
 **/
-
-router.route('/aeroports/:num_flight')
-.get(function(req,res){
-    Aeroports.find({'flight.num_flight': req.params.num_flight}, function(err, aeroports){
-        if(err)
+router.route('/aeroports/flights/:num_flight')
+.get(function(req,res){ 
+        Aeroports.find({"flight": {"num_flight": req.params.num_flight}}, function(err, aeroports) {
+        if (err)
             res.send(err);
         res.json(aeroports);
     });
