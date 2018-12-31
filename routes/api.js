@@ -57,7 +57,11 @@ var aeroportSchema = new mongoose.Schema({
 var Aeroports = mongoose.model('Aeroport', aeroportSchema);
 var Agents = mongoose.model('Agent', agentsSchema);
 
-// agents query
+//////////////////////////////////////////
+//////////////AGENTS QUERY////////////////
+//////////////////////////////////////////
+
+//get all agents
 router.route('/agents')
 .get(function(req,res){ 
     Agents.find(function(err, agents){
@@ -69,6 +73,7 @@ router.route('/agents')
     }); 
 });
 
+//get agent with registration number and password
 router.route('/agents/:registration_number/:password')
 .get(function(req,res){ 
     Agents.find({"registration_number": req.params.registration_number, "password": req.params.password},function(err, agents){
@@ -80,7 +85,11 @@ router.route('/agents/:registration_number/:password')
     }); 
 });
 
-// aeroports query
+//////////////////////////////////////////
+////////////AEROPORT QUERY////////////////
+//////////////////////////////////////////
+
+// get aeroports by name
 router.route('/aeroports/:name')
 .get(function(req,res){ 
         Aeroports.find({"name": req.params.name}, function(err, aeroports) {
@@ -110,17 +119,10 @@ router.route('/aeroports/flights/:name/:terminal')
     });
 });
 
-/**
-* Passenger Query
-**/
-router.route('/aeroports/flights/passenger/:name')
-.get(function(req,res){ 
-        Aeroports.find({"name": req.params.name, 'flight': { $exists: true }}, function(err, aeroports) {
-        if (err)
-            res.send(err);
-        res.json(aeroports);
-    });
-});
+//////////////////////////////////////////
+///////////PASSENGER QUERY////////////////
+//////////////////////////////////////////
+
 
 router.route('/aeroports/flights/:num_flight')
 .get(function(req,res){ 
