@@ -124,7 +124,7 @@ router.route('/aeroports/flights/:name/:terminal')
 //////////////////////////////////////////
 
 
-router.route('/aeroports/passenger/:name')
+router.route('/passenger/:name')
 .get(function(req,res){ 
         Aeroports.find({"name": req.params.name}, function(err, aeroports) {
         if (err)
