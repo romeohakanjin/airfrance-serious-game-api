@@ -125,10 +125,20 @@ router.route('/aeroports/flights/:name/:terminal')
 ///////////PASSENGER QUERY////////////////
 //////////////////////////////////////////
 
-
-router.route('/passenger/:num_flight')
+// get all passengers
+router.route('/passengers/:num_flight')
 .get(function(req,res){ 
         Aeroports.find({"flight.num_flight": req.params.num_flight}, function(err, aeroports) {
+        if (err)
+            res.send(err);
+        res.json(aeroports);
+    });
+});
+
+// get passenger by reference_number
+router.route('/passenger/:reference_number')
+.get(function(req,res){ 
+        Aeroports.find({"passenger.reference_number": req.params.reference_number}, function(err, aeroports) {
         if (err)
             res.send(err);
         res.json(aeroports);
