@@ -126,6 +126,8 @@ router.route('/aeroports/flights/:name/:terminal')
 //////////////////////////////////////////
 
 // get all passengers
+// Recherche bien avec le paramètre saisi, mais retourne tout l'objet aeoport
+// Trouver comment recupere juste les passagers
 router.route('/passengers/:num_flight')
 .get(function(req,res){ 
         Aeroports.find({"flight.num_flight": req.params.num_flight}, function(err, aeroports) {
@@ -136,6 +138,8 @@ router.route('/passengers/:num_flight')
 });
 
 // get passenger by reference_number
+// Recherche bien avec le paramètre saisi, mais retourne tout l'objet aeoport
+// Trouver comment recupere juste le passager
 router.route('/passenger/:reference_number')
 .get(function(req,res){ 
         Aeroports.find({"flight.passenger.reference_number": req.params.reference_number}, function(err, aeroports) {
@@ -145,5 +149,16 @@ router.route('/passenger/:reference_number')
     });
 });
 
+// get passenger by last_name and first_name
+// Recherche bien avec les paramètres saisi, mais retourne tout l'objet aeoport
+// Trouver comment recupere juste le passager
+router.route('/passenger/:last_name/:first_name')
+.get(function(req,res){ 
+        Aeroports.find({"flight.passenger.last_name": req.params.last_name, "flight.passenger.first_name": req.params.first_name}, function(err, aeroports) {
+        if (err)
+            res.send(err);
+        res.json(aeroports);
+    });
+});
 // Return router
 module.exports = router;
