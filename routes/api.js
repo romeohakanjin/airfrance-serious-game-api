@@ -4,7 +4,9 @@ var restful = require('node-restful');
 var mongoose = require('mongoose');
 var router = express.Router();
 
-// agents
+//////////////////////////////////////////
+//////////////AGENTS SCHEMA///////////////
+//////////////////////////////////////////
 var agentsSchema = new mongoose.Schema({
 	_id: String,
 	first_name: String,
@@ -13,8 +15,10 @@ var agentsSchema = new mongoose.Schema({
 	password: Number
 });
 
-// aeroports schema
-var aeroportSchema = new mongoose.Schema({
+//////////////////////////////////////////
+///////////AEROPORTS QUERY////////////////
+//////////////////////////////////////////
+var aeroportsSchema = new mongoose.Schema({
     _id: String,
     name: String,
     terminals: [{
@@ -54,8 +58,8 @@ var aeroportSchema = new mongoose.Schema({
 	}
 });
 
-var Aeroports = mongoose.model('Aeroport', aeroportSchema);
-var Agents = mongoose.model('Agent', agentsSchema);
+var Aeroports = mongoose.model('Aeroport', aeroportsSchema);
+var Agents = mongoose.model('Agent', agentSchema);
 
 //////////////////////////////////////////
 //////////////AGENTS QUERY////////////////
@@ -160,5 +164,7 @@ router.route('/passenger/:last_name/:first_name')
         res.json(aeroports);
     });
 });
+
 // Return router
 module.exports = router;
+
