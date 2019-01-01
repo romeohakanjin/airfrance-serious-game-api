@@ -128,7 +128,7 @@ router.route('/aeroports/flights/:name/:terminal')
 
 router.route('/passenger/:num_flight')
 .get(function(req,res){ 
-        Aeroports.find({"flight.num_flight": req.params.num_flight, "passenger": {$exists: true}}, function(err, aeroports) {
+        Aeroports.find({"flight.num_flight": req.params.num_flight}, function(err, aeroports) {
         if (err)
             res.send(err);
         res.json(aeroports);
