@@ -1,4 +1,6 @@
-// Dependencies
+//////////////////////////////////////////
+//////////////DEPENDENCIES////////////////
+//////////////////////////////////////////
 var express = require('express');
 var restful = require('node-restful');
 var mongoose = require('mongoose');
@@ -16,9 +18,9 @@ var agentsSchema = new mongoose.Schema({
 });
 
 //////////////////////////////////////////
-///////////AEROPORTS QUERY////////////////
+////////////AEROPORT QUERY////////////////
 //////////////////////////////////////////
-var aeroportsSchema = new mongoose.Schema({
+var aeroportSchema = new mongoose.Schema({
     _id: String,
     name: String,
     terminals: [{
@@ -58,8 +60,8 @@ var aeroportsSchema = new mongoose.Schema({
 	}
 });
 
-var Aeroports = mongoose.model('Aeroport', aeroportsSchema);
-var Agents = mongoose.model('Agent', agentSchema);
+var Aeroports = mongoose.model('Aeroport', aeroportSchema);
+var Agents = mongoose.model('Agent', agentsSchema);
 
 //////////////////////////////////////////
 //////////////AGENTS QUERY////////////////
