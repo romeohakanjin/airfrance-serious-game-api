@@ -138,7 +138,7 @@ router.route('/passengers/:num_flight')
 // get passenger by reference_number
 router.route('/passenger/:reference_number')
 .get(function(req,res){ 
-        Aeroports.find({"passenger.reference_number": req.params.reference_number}, function(err, aeroports) {
+        Aeroports.find({"flight.passenger.reference_number": req.params.reference_number}, function(err, aeroports) {
         if (err)
             res.send(err);
         res.json(aeroports);
