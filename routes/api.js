@@ -131,12 +131,12 @@ router.route('/aeroports/flights/:name/:terminal')
 ///////////PASSENGER QUERY////////////////
 //////////////////////////////////////////
 
-// get all passengers
+// get all passengers by num_flight
 // Recherche bien avec le paramètre saisi, mais retourne tout l'objet aeoport
 // Trouver comment recupere juste les passagers
 router.route('/flight/passengers/:num_flight')
 .get(function(req,res){ 
-        Aeroports.find({"flight.num_flight": req.params.num_flight, 'passenger': {$exists: true}}, function(err, aeroports) {
+        Aeroports.find({"flight.num_flight": req.params.num_flight, 'flight.passenger': {$exists: true}}, function(err, aeroports) {
         if (err)
             res.send(err);
         res.json(aeroports);
