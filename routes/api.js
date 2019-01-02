@@ -56,7 +56,10 @@ var aeroportSchema = new mongoose.Schema({
         incident: [{
           type: String,
           description: String
-        }]
+        }],
+        status: {
+            wording: String
+        }
 	}
 });
 
