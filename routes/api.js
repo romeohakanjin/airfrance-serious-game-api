@@ -156,10 +156,10 @@ router.route('/aeroports/flights/:name/:terminal')
 // Trouver comment recupere juste les passagers
 router.route('/passengers/:num_flight')
 .get(function(req,res){ 
-        Passengers.find({"flight.num_flight": req.params.num_flight}, function(err, passengers) {
+        Aeroports.find({"flight.num_flight": req.params.num_flight}, function(err, aeroports) {
         if (err)
             res.send(err);
-        res.json(passengers);
+        res.json(aeroports);
     });
 });
 
@@ -168,10 +168,10 @@ router.route('/passengers/:num_flight')
 // Trouver comment recupere juste le passager
 router.route('/passenger/:reference_number')
 .get(function(req,res){ 
-        Passengers.find({"flight.passenger.reference_number": req.params.reference_number}, function(err, passengers) {
+        Aeroports.find({"flight.passenger.reference_number": req.params.reference_number}, function(err, aeroports) {
         if (err)
             res.send(err);
-        res.json(passengers);
+        res.json(aeroports);
     });
 });
 
@@ -180,10 +180,10 @@ router.route('/passenger/:reference_number')
 // Trouver comment recupere juste le passager
 router.route('/passenger/:last_name/:first_name')
 .get(function(req,res){ 
-        Passengers.find({"flight.passenger.last_name": req.params.last_name, "flight.passenger.first_name": req.params.first_name}, function(err, passengers) {
+        Aeroports.find({"flight.passenger.last_name": req.params.last_name, "flight.passenger.first_name": req.params.first_name}, function(err, aeroports) {
         if (err)
             res.send(err);
-        res.json(passengers);
+        res.json(aeroports);
     });
 });
 
