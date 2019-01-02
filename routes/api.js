@@ -60,28 +60,8 @@ var aeroportSchema = new mongoose.Schema({
 	}
 });
 
-//////////////////////////////////////////
-///////////PASSENGER SCHEMA///////////////
-//////////////////////////////////////////
-var passengersSchema = new mongoose.Schema({
-    _id: String,
-    reference_number: Number,
-    last_name: String,
-    first_name: String,
-    address: String,
-    mobile: String,
-    mail: String,
-    status: {
-      wording: String
-    },
-    luggage: {
-        number: Number
-    }
-});
-
 var Aeroports = mongoose.model('Aeroport', aeroportSchema);
 var Agents = mongoose.model('Agent', agentsSchema);
-var Passengers = mongoose.model('Passenger', passengersSchema);
 
 //////////////////////////////////////////
 //////////////AGENTS QUERY////////////////
@@ -178,12 +158,12 @@ router.route('/passenger/:reference_number')
 // get passenger by last_name and first_name
 // Recherche bien avec les paramètres saisi, mais retourne tout l'objet aeoport
 // Trouver comment recupere juste le passager
-router.route('/passenger/test/:last_name/:first_name')
+router.route('/passenger/:last_name/:first_name')
 .get(function(req,res){ 
-        Passengers.find({"flight.passenger.last_name": req.params.last_name, "flight.passenger.first_name": req.params.first_name}, function(err, passengers) {
+        Aeroports.find({"flight.passenger.last_name": req.params.last_name, "flight.passenger.first_name": req.params.first_name}, function(err, aeroports) {
         if (err)
             res.send(err);
-        res.json(passengers);
+        res.json(aeroports);
     });
 });
 
