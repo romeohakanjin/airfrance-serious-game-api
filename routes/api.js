@@ -178,7 +178,7 @@ router.route('/passenger/:reference_number')
 // get passenger by last_name and first_name
 // Recherche bien avec les paramètres saisi, mais retourne tout l'objet aeoport
 // Trouver comment recupere juste le passager
-router.route('/passenger/:last_name/:first_name')
+router.route('/passenger/identity/:last_name/:first_name')
 .get(function(req,res){ 
         Passengers.find({"flight.passenger.last_name": req.params.last_name, "flight.passenger.first_name": req.params.first_name}, function(err, passengers) {
         if (err)
