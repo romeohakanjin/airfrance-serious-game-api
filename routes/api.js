@@ -18,7 +18,7 @@ var agentsSchema = new mongoose.Schema({
 });
 
 //////////////////////////////////////////
-////////////AEROPORT QUERY////////////////
+////////////AEROPORT SCHEMA///////////////
 //////////////////////////////////////////
 var aeroportSchema = new mongoose.Schema({
     _id: String,
@@ -60,8 +60,28 @@ var aeroportSchema = new mongoose.Schema({
 	}
 });
 
+//////////////////////////////////////////
+///////////PASSENGER SCHEMA///////////////
+//////////////////////////////////////////
+var passengersSchema = new mongoose.Schema({
+    _id: String,
+    reference_number: Number,
+    last_name: String,
+    first_name: String,
+    address: String,
+    mobile: String,
+    mail: String,
+    status: {
+      wording: String
+    },
+    luggage: {
+        number: Number
+    }
+});
+
 var Aeroports = mongoose.model('Aeroport', aeroportSchema);
 var Agents = mongoose.model('Agent', agentsSchema);
+var Passengers = mongoose.model('Aeroport', passengersSchema);
 
 //////////////////////////////////////////
 //////////////AGENTS QUERY////////////////
@@ -136,10 +156,10 @@ router.route('/aeroports/flights/:name/:terminal')
 // Trouver comment recupere juste les passagers
 router.route('/passengers/:num_flight')
 .get(function(req,res){ 
-        Aeroports.find({"flight.num_flight": req.params.num_flight}, function(err, aeroports) {
+        Passengers.find({"flight.num_flight": req.params.num_flight}, function(err, passengers) {
         if (err)
             res.send(err);
-        res.json(aeroports);
+        res.json(passengers);
     });
 });
 
@@ -148,10 +168,10 @@ router.route('/passengers/:num_flight')
 // Trouver comment recupere juste le passager
 router.route('/passenger/:reference_number')
 .get(function(req,res){ 
-        Aeroports.find({"flight.passenger.reference_number": req.params.reference_number}, function(err, aeroports) {
+        Passengers.find({"flight.passenger.reference_number": req.params.reference_number}, function(err, passengers) {
         if (err)
             res.send(err);
-        res.json(aeroports);
+        res.json(passengers);
     });
 });
 
@@ -160,10 +180,10 @@ router.route('/passenger/:reference_number')
 // Trouver comment recupere juste le passager
 router.route('/passenger/:last_name/:first_name')
 .get(function(req,res){ 
-        Aeroports.find({"flight.passenger.last_name": req.params.last_name, "flight.passenger.first_name": req.params.first_name}, function(err, aeroports) {
+        Passengers.find({"flight.passenger.last_name": req.params.last_name, "flight.passenger.first_name": req.params.first_name}, function(err, passengers) {
         if (err)
             res.send(err);
-        res.json(aeroports);
+        res.json(passengers);
     });
 });
 
