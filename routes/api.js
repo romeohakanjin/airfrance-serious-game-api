@@ -180,10 +180,10 @@ router.route('/passenger/:reference_number')
 // Trouver comment recupere juste le passager
 router.route('/passenger/:last_name/:first_name')
 .get(function(req,res){ 
-        Aeroports.find({"flight.passenger.last_name": req.params.last_name, "flight.passenger.first_name": req.params.first_name}, function(err, aeroports) {
+        Passengers.find({"flight.passenger.last_name": req.params.last_name, "flight.passenger.first_name": req.params.first_name}, function(err, passengers) {
         if (err)
             res.send(err);
-        res.json(aeroports);
+        res.json(passengers);
     });
 });
 
