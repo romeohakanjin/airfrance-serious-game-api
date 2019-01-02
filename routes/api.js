@@ -63,25 +63,25 @@ var aeroportSchema = new mongoose.Schema({
 //////////////////////////////////////////
 ///////////PASSENGER SCHEMA///////////////
 //////////////////////////////////////////
-var passengersSchema = new mongoose.Schema({
-    _id: String,
-    reference_number: Number,
-    last_name: String,
-    first_name: String,
-    address: String,
-    mobile: String,
-    mail: String,
-    status: {
-      wording: String
-    },
-    luggage: {
-        number: Number
-    }
-});
+// var passengersSchema = new mongoose.Schema({
+//     _id: String,
+//     reference_number: Number,
+//     last_name: String,
+//     first_name: String,
+//     address: String,
+//     mobile: String,
+//     mail: String,
+//     status: {
+//       wording: String
+//     },
+//     luggage: {
+//         number: Number
+//     }
+// });
 
 var Aeroports = mongoose.model('Aeroport', aeroportSchema);
 var Agents = mongoose.model('Agent', agentsSchema);
-var Passengers = mongoose.model('Aeroport', passengersSchema);
+//var Passengers = mongoose.model('Aeroport', passengersSchema);
 
 //////////////////////////////////////////
 //////////////AGENTS QUERY////////////////
