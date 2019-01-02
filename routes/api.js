@@ -81,7 +81,7 @@ var passengersSchema = new mongoose.Schema({
 
 var Aeroports = mongoose.model('Aeroport', aeroportSchema);
 var Agents = mongoose.model('Agent', agentsSchema);
-var Passengers = mongoose.model('Aeroport', passengersSchema);
+var Passengers = mongoose.model('Passenger', passengersSchema);
 
 //////////////////////////////////////////
 //////////////AGENTS QUERY////////////////
