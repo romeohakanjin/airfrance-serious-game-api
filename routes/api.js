@@ -100,7 +100,7 @@ router.route('/agents/:registration_number/:password')
 //////////////////////////////////////////
 
 // get aeroports by name
-router.route('/aeroports/:name')
+router.route('/airports/:name')
 .get(function(req,res){ 
         Aeroports.find({"name": req.params.name}, function(err, aeroports) {
         if (err)
@@ -111,7 +111,7 @@ router.route('/aeroports/:name')
 
 // get the list of only aeroports registred
 //TODO: Voir si 'flight' peut être remplacer par "flight"
-router.route('/aeroports/:name/:terminal')
+router.route('/airports/:name/:terminal')
 .get(function(req,res){ 
         Aeroports.find({"name": req.params.name, "terminals.name": req.params.terminal, 'flight': { $exists: false }}, function(err, aeroports) {
         if (err)
@@ -122,7 +122,7 @@ router.route('/aeroports/:name/:terminal')
 
 // get the list of aeroports with fligths registred
 //TODO: Voir si 'flight' peut être remplacer par "flight"
-router.route('/aeroports/flights/:name/:terminal')
+router.route('/airports/flights/:name/:terminal')
 .get(function(req,res){ 
         Aeroports.find({"name": req.params.name, "terminals.name": req.params.terminal, 'flight': { $exists: true }}, function(err, aeroports) {
         if (err)
