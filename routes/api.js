@@ -94,14 +94,9 @@ router.route('/agents/:registration_number/:password')
     }); 
 });
 
-<<<<<<< HEAD
-// aeroports
-router.route('/aeroports/:name')
-=======
 //////////////////////////////////////////
 ////////////AEROPORT QUERY////////////////
 //////////////////////////////////////////
-
 // get aeroports by name
 router.route('/airports/:name')
 .get(function(req,res){ 
