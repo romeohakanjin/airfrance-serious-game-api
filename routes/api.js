@@ -1,10 +1,14 @@
-// Dependencies
+//////////////////////////////////////////
+//////////////DEPENDENCIES////////////////
+//////////////////////////////////////////
 var express = require('express');
 var restful = require('node-restful');
 var mongoose = require('mongoose');
 var router = express.Router();
 
-// agents
+//////////////////////////////////////////
+//////////////AGENTS SCHEMA///////////////
+//////////////////////////////////////////
 var agentsSchema = new mongoose.Schema({
 	_id: String,
 	first_name: String,
@@ -13,7 +17,9 @@ var agentsSchema = new mongoose.Schema({
 	password: Number
 });
 
-// aeroports schema
+//////////////////////////////////////////
+////////////AEROPORT SCHEMA///////////////
+//////////////////////////////////////////
 var aeroportSchema = new mongoose.Schema({
     _id: String,
     name: String,
@@ -27,6 +33,7 @@ var aeroportSchema = new mongoose.Schema({
 		arrival_time: String,
 		departure_date: String,
 		terminal: String,
+        gate: String,
 		escale: {
 			departure_time: String,
 			destination: String,
@@ -34,30 +41,36 @@ var aeroportSchema = new mongoose.Schema({
 			place_departure: String
 		},
 		passenger: [{
-    	reference_number: Number,
-		last_name: String,
-    	first_name: String,
-    	address: String,
-    	mobile: String,
-    	mail: String,
-      	status: {
-          wording: String
-        },
-          luggage: {
-            number: Number
-          }
-    }],
-    incident: [{
-      type: String,
-      description: String
-    }]
+        	reference_number: Number,
+    		last_name: String,
+        	first_name: String,
+        	address: String,
+        	mobile: String,
+        	mail: String,
+          	status: {
+              wording: String
+            },
+            luggage: {
+                number: Number
+            },
+            incident: [{
+              type: String,
+              description: String
+            }],
+        }],
+        status: {
+            wording: String
+        }
 	}
 });
 
 var Aeroports = mongoose.model('Aeroport', aeroportSchema);
 var Agents = mongoose.model('Agent', agentsSchema);
 
-// agents
+//////////////////////////////////////////
+//////////////AGENTS QUERY////////////////
+//////////////////////////////////////////
+//get all agents
 router.route('/agents')
 .get(function(req,res){ 
     Agents.find(function(err, agents){
@@ -69,6 +82,7 @@ router.route('/agents')
     }); 
 });
 
+//get agent with registration number and password
 router.route('/agents/:registration_number/:password')
 .get(function(req,res){ 
     Agents.find({"registration_number": req.params.registration_number, "password": req.params.password},function(err, agents){
@@ -80,10 +94,18 @@ router.route('/agents/:registration_number/:password')
     }); 
 });
 
+<<<<<<< HEAD
 // aeroports
 router.route('/aeroports/:name')
+=======
+//////////////////////////////////////////
+////////////AEROPORT QUERY////////////////
+//////////////////////////////////////////
+
+// get aeroports by name
+router.route('/airports/:name')
+>>>>>>> 7f5f827df540ebe5f93a8c21f8382cf53b92fe71
 .get(function(req,res){ 
-        //Mongoose prévoit une fonction pour la recherche d'un document par son identifiant
         Aeroports.find({"name": req.params.name}, function(err, aeroports) {
         if (err)
             res.send(err);
@@ -91,9 +113,10 @@ router.route('/aeroports/:name')
     });
 });
 
-router.route('/aeroports/:name/:terminal')
+// get the list of only aeroports registred
+//TODO: Voir si 'flight' peut être remplacer par "flight"
+router.route('/airports/:name/:terminal')
 .get(function(req,res){ 
-        //Mongoose prévoit une fonction pour la recherche d'un document par son identifiant
         Aeroports.find({"name": req.params.name, "terminals.name": req.params.terminal, 'flight': { $exists: false }}, function(err, aeroports) {
         if (err)
             res.send(err);
@@ -101,10 +124,48 @@ router.route('/aeroports/:name/:terminal')
     });
 });
 
-router.route('/aeroports/flights/:name/:terminal')
+// get the list of aeroports with fligths registred
+//TODO: Voir si 'flight' peut être remplacer par "flight"
+router.route('/airports/flights/:name/:terminal')
 .get(function(req,res){ 
-        //Mongoose prévoit une fonction pour la recherche d'un document par son identifiant
         Aeroports.find({"name": req.params.name, "terminals.name": req.params.terminal, 'flight': { $exists: true }}, function(err, aeroports) {
+        if (err)
+            res.send(err);
+        res.json(aeroports);
+    });
+});
+
+//////////////////////////////////////////
+///////////PASSENGER QUERY////////////////
+//////////////////////////////////////////
+
+// get all passengers by num_flight
+// Recherche bien avec le paramètre saisi, mais retourne tout l'objet aeoport
+router.route('/passengers/:num_flight')
+.get(function(req,res){ 
+        Aeroports.find({"flight.num_flight": req.params.num_flight, 'flight.passenger': {$exists: true}}, function(err, aeroports) {
+        if (err)
+            res.send(err);
+        res.json(aeroports);
+    });
+});
+
+// get passenger by reference_number
+// Recherche bien avec le paramètre saisi, mais retourne tout l'objet aeoport
+router.route('/passenger/:reference_number')
+.get(function(req,res){ 
+        Aeroports.find({"flight.passenger.reference_number": req.params.reference_number}, function(err, aeroports) {
+        if (err)
+            res.send(err);
+        res.json(aeroports);
+    });
+});
+
+// get passenger by last_name and first_name
+// Recherche bien avec les paramètres saisi, mais retourne tout l'objet aeoport
+router.route('/passenger/:last_name/:first_name')
+.get(function(req,res){ 
+        Aeroports.find({"flight.passenger.last_name": req.params.last_name, "flight.passenger.first_name": req.params.first_name}, function(err, aeroports) {
         if (err)
             res.send(err);
         res.json(aeroports);
@@ -113,3 +174,4 @@ router.route('/aeroports/flights/:name/:terminal')
 
 // Return router
 module.exports = router;
+
