@@ -104,7 +104,6 @@ router.route('/aeroports/:name')
 
 // get aeroports by name
 router.route('/airports/:name')
->>>>>>> 7f5f827df540ebe5f93a8c21f8382cf53b92fe71
 .get(function(req,res){ 
         Aeroports.find({"name": req.params.name}, function(err, aeroports) {
         if (err)
@@ -118,6 +117,16 @@ router.route('/airports/:name')
 router.route('/airports/:name/:terminal')
 .get(function(req,res){ 
         Aeroports.find({"name": req.params.name, "terminals.name": req.params.terminal, 'flight': { $exists: false }}, function(err, aeroports) {
+        if (err)
+            res.send(err);
+        res.json(aeroports);
+    });
+});
+
+// get the list of only aeroports registred for arrival
+router.route('/airports/arrival/:name')
+.get(function(req,res){ 
+        Aeroports.find({"flight.name": req.params.name, 'flight': { $exists: false }}, function(err, aeroports) {
         if (err)
             res.send(err);
         res.json(aeroports);
