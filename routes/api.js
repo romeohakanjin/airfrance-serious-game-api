@@ -121,7 +121,7 @@ router.route('/airports/:name/:terminal')
 // get the list of only aeroports registred for arrival
 router.route('/airports/arrival/:name')
 .get(function(req,res){ 
-        Aeroports.find({"flight.name": req.params.name, 'flight': { $exists: false }}, function(err, aeroports) {
+        Aeroports.find({"flight.destination": req.params.name, 'flight': { $exists: false }}, function(err, aeroports) {
         if (err)
             res.send(err);
         res.json(aeroports);
