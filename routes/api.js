@@ -128,6 +128,17 @@ router.route('/flights/:destination/arrival')
     });
 });
 
+
+// get flight informations
+router.route('/flight/:flighttime/:destination/:flight/:boarding/:status')
+.get(function(req,res){ 
+        Aeroports.find({"flight.destination": req.params.destination, 'flight': { $exists: true }}, function(err, aeroports) {
+        if (err)
+            res.send(err);
+        res.json(aeroports);
+    });
+});
+
 // get the list of aeroports with fligths registred
 //TODO: Voir si 'flight' peut être remplacer par "flight"
 router.route('/airports/flights/:name/:terminal')
