@@ -129,7 +129,7 @@ router.route('/flights/:destination/arrival')
 });
 
 
-// get flight informations
+// get flight infos
 router.route('/flight/:flighttime/:destination/:flight/:boarding/:status')
 .get(function(req,res){ 
         Aeroports.find({"flight.destination": req.params.destination, 'flight': { $exists: true }}, function(err, aeroports) {
