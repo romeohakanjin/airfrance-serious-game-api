@@ -36,7 +36,7 @@ var aeroportSchema = new mongoose.Schema({
         gate: String,
         seats: {
               premiere: Number,
-              business: Number,
+              business:Number,
               eco: Number
         },	
 		escale: {
