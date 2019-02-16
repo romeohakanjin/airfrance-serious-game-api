@@ -34,6 +34,11 @@ var aeroportSchema = new mongoose.Schema({
 		departure_date: String,
 		terminal: String,
         gate: String,
+        seats: {
+              premiere: Number,
+              buisiness: Number,
+              eco: Number
+        },	
 		escale: {
 			departure_time: String,
 			destination: String,
@@ -57,6 +62,13 @@ var aeroportSchema = new mongoose.Schema({
               type: String,
               description: String
             }],
+            pax: {
+              status: String,
+              type: String
+            },
+            gp: {
+              status: String,
+            }
         }],
         status: {
             wording: String
