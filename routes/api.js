@@ -120,7 +120,6 @@ router.route('/airports/:name')
 });
 
 // get the list of only aeroports registred
-//TODO: Voir si 'flight' peut être remplacer par "flight"
 router.route('/airports/:name/:terminal')
 .get(function(req,res){ 
         Aeroports.find({"name": req.params.name, "terminals.name": req.params.terminal, 'flight': { $exists: false }}, function(err, aeroports) {
