@@ -163,8 +163,7 @@ router.route('/airports/flights/:name/:terminal')
 });
 
 // get count for passenger reserved pax status
-router.route('/flight/:numflight/pax/reserved/count')
-.get(function(req,res){ 
+router.route('/flight/:numflight/pax/reserved/count').get(function(req,res){ 
         Aeroports.find({"flight.num_flight" : req.params.numflight, "flight.passenger.pax.status": "reserved", 'flight': { $exists: true }}).count();
 });
 
