@@ -183,9 +183,9 @@ router.route('/flight/pax/registred/count')
 });
 
 // get count for passenger onboard pax status
-router.route('/flight/pax/onboard/count')
+router.route('/flight/:numflight/pax/onboard/count')
 .get(function(req,res){ 
-        Aeroports.count({"flight.passenger.pax.status": "onboard", 'flight': { $exists: true }}, function(err, aeroports) {
+        Aeroports.count({"flight.num_flight" : req.params.numflight, "flight.passenger.pax.status": "onboard", 'flight': { $exists: true }}, function(err, aeroports) {
         if (err)
             res.send(err);
         res.json(aeroports);
