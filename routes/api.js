@@ -165,7 +165,11 @@ router.route('/airports/flights/:name/:terminal')
 // get count for passenger reserved pax status
 router.route('/flight/count/:status')
 .get(function(req,res){ 
-        Aeroports.find({"flight.passenger.pax.status": req.params.status, 'flight': { $exists: true }}).count();
+        Aeroports.count({"flight.passenger.pax.status": req.params.status, 'flight': { $exists: true }}, function(err, aeroports) {
+        if (err)
+            res.send(err);
+        res.json(aeroports);
+    });
 });
 
 //////////////////////////////////////////
