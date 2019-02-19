@@ -36,7 +36,7 @@ var aeroportSchema = new mongoose.Schema({
         gate: String,
         seats: {
               premiere: Number,
-              business:Number,
+              business: Number,
               eco: Number
         },	
 		escale: {
@@ -160,6 +160,16 @@ router.route('/airports/flights/:name/:terminal')
             res.send(err);
         res.json(aeroports);
     });
+});
+
+// get count for passenger reserved pax status
+router.route('/flight/count/:status')
+.get(function(req,res){ 
+        Aeroports.find({"flight.passenger.pax.status": req.params.status, 'flight': { $exists: true }}, function(err, aeroports) {
+        if (err)
+            res.send(err);
+        res.json(aeroports);
+    }).count();
 });
 
 //////////////////////////////////////////
