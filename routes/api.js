@@ -163,9 +163,29 @@ router.route('/airports/flights/:name/:terminal')
 });
 
 // get count for passenger reserved pax status
-router.route('/flight/count/:status')
+router.route('/flight/pax/reserved/count')
 .get(function(req,res){ 
-        Aeroports.count({"flight.passenger.pax.status": req.params.status, 'flight': { $exists: true }}, function(err, aeroports) {
+        Aeroports.count({"flight.passenger.pax.status": "reserved", 'flight': { $exists: true }}, function(err, aeroports) {
+        if (err)
+            res.send(err);
+        res.json(aeroports);
+    });
+});
+
+// get count for passenger registred pax status
+router.route('/flight/pax/registred/count')
+.get(function(req,res){ 
+        Aeroports.count({"flight.passenger.pax.status": "registred", 'flight': { $exists: true }}, function(err, aeroports) {
+        if (err)
+            res.send(err);
+        res.json(aeroports);
+    });
+});
+
+// get count for passenger onboard pax status
+router.route('/flight/pax/onboard/count')
+.get(function(req,res){ 
+        Aeroports.count({"flight.passenger.pax.status": "onboard", 'flight': { $exists: true }}, function(err, aeroports) {
         if (err)
             res.send(err);
         res.json(aeroports);
