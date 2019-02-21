@@ -178,8 +178,8 @@ router.route('/flight/:numflight/pax/registred/count')
         Aeroports.find({"flight.num_flight" : req.params.numflight, "flight.passenger.pax.status": "registred", 'flight': { $exists: true }}, function(err, aeroports) {
         if (err)
             res.send(err);
-        res.json(aeroports.count());
-    });
+        res.json(aeroports);
+    }).count();
 });
 
 // get count for passenger onboard pax status
