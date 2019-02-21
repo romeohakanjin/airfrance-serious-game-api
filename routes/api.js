@@ -175,7 +175,7 @@ router.route('/flight/:numflight/pax/reserved/count')
 // get count for passenger registred pax status
 router.route('/flight/:numflight/pax/registred/count')
 .get(function(req,res){ 
-        Aeroports.aggregate([{$group:{_id:"$flight.passenger.pax.status", Total: {$sum: 1}}}], function(err, aeroports) {
+        Aeroports.aggregate([{$group:{_id:"$flight.passenger.gp.status", Total: {$sum: 1}}}], function(err, aeroports) {
         if (err)
             res.send(err);
         res.json(aeroports);
