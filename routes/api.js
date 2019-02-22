@@ -62,10 +62,10 @@ var aeroportSchema = new mongoose.Schema({
               type: String,
               description: String
             }],
-            pax: {  
-		      status:String,
+            /*pax: {  
+		      status: String,
 		      type: String
-		    },
+		    },*/
             gp: {
               status: String,
             }
