@@ -46,29 +46,29 @@ var aeroportSchema = new mongoose.Schema({
 			place_departure: String
 		},
 		passenger: [{
+			status: {
+              wording: String
+            },
+            luggage: {
+                number: Number
+            },
+            gp: {
+              status: String,
+            },
+            incident: [{
+              type: String,
+              description: String
+            }],
         	reference_number: Number,
     		last_name: String,
         	first_name: String,
         	address: String,
         	mobile: String,
         	mail: String,
-          	status: {
-              wording: String
-            },
-            luggage: {
-                number: Number
-            },
-            incident: [{
-              type: String,
-              description: String
-            }],
-            /*pax: {  
+            pax: {  
 		      status: String,
 		      type: String
-		    },*/
-            gp: {
-              status: String,
-            }
+		    }
         }],
         status: {
             wording: String
