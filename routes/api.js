@@ -66,8 +66,8 @@ var aeroportSchema = new mongoose.Schema({
         	mobile: String,
         	mail: String,
             pax: {  
-		      pax_status: String,
-		      pax_type: String
+		      abe: String,
+		      abc: String
 		    }
         }],
         status: {
