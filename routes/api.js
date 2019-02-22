@@ -62,10 +62,10 @@ var aeroportSchema = new mongoose.Schema({
               type: String,
               description: String
             }],
-            pax: {
+            /*pax: {
               status: String,
               type: String
-            },
+            },*/
             gp: {
               status: String,
             }
@@ -162,7 +162,7 @@ router.route('/airports/flights/:name/:terminal')
     });
 });
 
-// get count for passenger reserved pax status
+/*// get count for passenger reserved pax status
 router.route('/flight/:numflight/pax/reserved/count')
 .get(function(req,res){ 
         Aeroports.count({"flight.num_flight" : req.params.numflight, "flight.passenger.pax.status": "reserved", 'flight': { $exists: true }}, function(err, aeroports) {
@@ -190,7 +190,7 @@ router.route('/flight/:numflight/pax/onboard/count')
             res.send(err);
         res.json(aeroports);
     });
-});
+});*/
 
 //////////////////////////////////////////
 ///////////PASSENGER QUERY////////////////
