@@ -109,7 +109,7 @@ router.route('/agents/:registration_number/:password')
 //////////////////////////////////////////
 ////////////AEROPORT QUERY////////////////
 //////////////////////////////////////////
-//get all the airports
+//get all airports
 router.route('/airports')
 .get(function(req,res){ 
         Aeroports.find({'flight': { $exists: false }}, function(err, aeroports) {
