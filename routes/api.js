@@ -112,7 +112,7 @@ router.route('/agents/:registration_number/:password')
 //get all airports
 router.route('/airports')
 .get(function(req,res){ 
-    Aeroports.find(function(err, agents){
+    Aeroports.find(function(err, aeroports){
         if (err){
             res.send(err); 
         }
