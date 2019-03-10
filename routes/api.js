@@ -109,6 +109,18 @@ router.route('/agents/:registration_number/:password')
 //////////////////////////////////////////
 ////////////AEROPORT QUERY////////////////
 //////////////////////////////////////////
+//get all aeroports
+router.route('/aeroports')
+.get(function(req,res){ 
+    Aeroports.find(function(err, agents){
+        if (err){
+            res.send(err); 
+        }
+        res.json(aeroports); 
+        
+    }); 
+});
+
 // get aeroports by name
 router.route('/airports/:name')
 .get(function(req,res){ 
