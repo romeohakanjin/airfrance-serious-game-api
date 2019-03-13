@@ -239,6 +239,29 @@ router.route('/passenger/:last_name/:first_name')
     });
 });
 
+// set incident by reference_number, type_incident and description_incident
+// Recherche bien avec les paramètres saisi, mais retourne tout l'objet aeoport
+router.route('/passenger/addIncident/:reference_number')
+.set(function(req,res){ 
+    Aeroports.find({"flight.passenger.reference_number": req.params.reference_number}, function (err, contact) {
+        if (err)
+            res.send(err);
+
+        Aeroports.flight.passenger.incident.type = req.params.type_incident;
+        Aeroports.flight.passenger.incident.description = req.params.description_incident;
+
+        // save the incident and check for errors
+            Aeroport.save(function (err) {
+                if (err)
+                    res.json(err);
+                res.json({
+                    message: 'Incident updated',
+                    data: incident
+                });
+            });
+        });
+    });
+});
+
 // Return router
 module.exports = router;
-
