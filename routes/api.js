@@ -241,8 +241,8 @@ router.route('/passenger/:last_name/:first_name')
 
 // set incident by reference_number, type_incident and description_incident
 // Recherche bien avec les paramètres saisi, mais retourne tout l'objet aeoport
-/*router.route('/passengerIncident/:reference_number')
-.set(function(req,res){ 
+router.route('/passengerIncident/:reference_number')
+.get(function(req,res){ 
     Aeroports.find({"flight.passenger.reference_number": req.params.reference_number}, function (err, contact) {
         if (err)
             res.send(err);
@@ -261,7 +261,7 @@ router.route('/passenger/:last_name/:first_name')
             });
         });
     });
-});*/
+});
 
 // Return router
 module.exports = router;
