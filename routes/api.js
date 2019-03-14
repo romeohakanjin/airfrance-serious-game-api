@@ -247,7 +247,7 @@ router.route('/passengerIncident/:reference_number')
         if (err)
             res.send(err);
 
-        Aeroports.flight.passenger.incident.type = req.params.type_incident;
+        /*Aeroports.flight.passenger.incident.type = req.params.type_incident;
         Aeroports.flight.passenger.incident.description = req.params.description_incident;
 
         // save the incident and check for errors
@@ -259,7 +259,7 @@ router.route('/passengerIncident/:reference_number')
                     data: incident
                 });
             });
-        });
+        });*/
     });
 });
 
