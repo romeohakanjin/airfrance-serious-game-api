@@ -243,10 +243,10 @@ router.route('/passenger/:last_name/:first_name')
 // Recherche bien avec les paramètres saisi, mais retourne tout l'objet aeoport
 router.route('/passengerIncident/:reference_number')
 .get(function(req,res){ 
-    Aeroports.find({"flight.passenger.reference_number": req.params.reference_number}, function (err, contact) {
+    Aeroports.find({"flight.passenger.reference_number": req.params.reference_number}, function (err, aeroports) {
         if (err)
             res.send(err);
-
+        res.json(aeroports);
         /*Aeroports.flight.passenger.incident.type = req.params.type_incident;
         Aeroports.flight.passenger.incident.description = req.params.description_incident;
 
