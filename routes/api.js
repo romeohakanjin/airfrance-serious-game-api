@@ -251,16 +251,13 @@ router.route('/passengerIncident/:reference_number')
         Aeroports.flight.passenger.incident.description = req.params.description_incident;
 
         // save the incident and check for errors
-        Aeroport.save(function (err) {
+        Aeroport.save(function (err, aeroport) {
                 if (err)
                     res.json(err);
-                res.json({
-                    message: 'Incident updated',
-                    data: incident
-                });
+                res.json(aeroport);
             });
         });
-        res.json(aeroport);
+        
     });
 });
 
