@@ -252,13 +252,12 @@ router.route('/passengerIncident/:reference_number')
 
         // save the incident and check for errors
         Aeroport.save(function (err, aeroport) {
-                if (err)
-                    res.json(err);
-                res.json(aeroport);
-            });
+            if (err)
+                res.json(err);
+            res.json(aeroport);
         });
-        
     });
+        
 });
 
 // Return router
