@@ -140,7 +140,7 @@ router.route('/airports/:name/:terminal')
     });
 });
 
-// get the list of only aeroports registred for arrival
+// get the list of only registered airport for arrival
 router.route('/flights/:destination/arrival')
 .get(function(req,res){ 
         Aeroports.find({"flight.destination": req.params.destination, 'flight': { $exists: true }}, function(err, aeroports) {
@@ -161,7 +161,7 @@ router.route('/flight/:flighttime/:destination/:flight/:boarding/:status')
     });
 });
 
-// get the list of aeroports with fligths registred
+// get the list of airport with flights registered
 //TODO: Voir si 'flight' peut être remplacer par "flight"
 router.route('/airports/flights/:name/:terminal')
 .get(function(req,res){ 
@@ -243,7 +243,7 @@ router.route('/passenger/:last_name/:first_name')
 // Recherche bien avec les paramètres saisi, mais retourne tout l'objet aeoport
 router.route('/passengerIncident/:reference_number')
 .get(function(req,res){ 
-    Aeroports.find({"flight.passenger.reference_number": req.params.reference_number, "terminals.name": "4T3"}}, function (err, aeroport) {
+    Aeroports.find({"flight.passenger.reference_number": req.params.reference_number}, function (err, aeroport) {
         if (err)
             res.send(err);
 
@@ -257,8 +257,29 @@ router.route('/passengerIncident/:reference_number')
             res.json(aeroport);
         });
     });
-        
+
 });
+
+
+// Recherche bien avec les paramètres saisi, mais retourne tout l'objet aeoport
+router.route('/passengerIncidentTest/:reference_number')
+    .post(function(req,res){
+        Aeroports.find({"flight.passenger.reference_number": req.params.reference_number, "terminals.name":"4T3"}, function (err, aeroport) {
+            if (err)
+                res.send(err);
+
+            Aeroports.flight.passenger.incident.type = req.params.type_incident;
+            Aeroports.flight.passenger.incident.description = req.params.description_incident;
+
+            // save the incident and check for errors
+            Aeroport.save(function (err, aeroport2) {
+                if (err)
+                    res.json(err);
+                res.json(aeroport);
+            });
+        });
+
+    });
 
 // Return router
 module.exports = router;
