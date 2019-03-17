@@ -280,6 +280,20 @@ router.route('/passengerIncidentTest/:reference_number')
         });
 
     });
+router.route('/getPAX/:reference_number')
+    .get(function(req,res){
+        Aeroports.find({"flight.passenger.reference_number": req.params.reference_number, "flight.num_flight": 548}, function (err, aeroport) {
+            if (err)
+                res.send(err);
 
+            // save the incident and check for errors
+            Aeroport.save(function (err, aeroport2) {
+                if (err)
+                    res.json(err);
+                res.json(aeroport);
+            });
+        });
+
+    });
 // Return router
 module.exports = router;
