@@ -268,8 +268,8 @@ router.route('/passengerIncidentTest/:reference_number')
             if (err)
                 res.send(err);
 
-            Aeroports.flight.passenger.incident.type = req.params.type_incident;
-            Aeroports.flight.passenger.incident.description = req.params.description_incident;
+            Aeroports.flight.passenger.incident.type = "type";
+            Aeroports.flight.passenger.incident.description = "descr";
 
             // save the incident and check for errors
             Aeroport.save(function (err, aeroport2) {
