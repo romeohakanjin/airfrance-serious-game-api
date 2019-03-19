@@ -242,7 +242,7 @@ router.route('/passenger/:last_name/:first_name')
 // update passenger incident
 router.route('/passengerIncident/:reference_number')
 .get(function(req,res){ 
-        Aeroports.updateOne({ flight.passenger.reference_number : "6974" }, { $set: {flight.passenger.first_name: "Violette" }}, function(err, aeroports) {
+        Aeroports.update({ flight.passenger.reference_number : "6974" }, { $set: {flight.passenger.first_name: "Violette" }}, function(err, aeroports) {
         if (err)
             res.send(err);
         res.json(aeroports);
