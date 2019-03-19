@@ -150,6 +150,15 @@ router.route('/flights/:destination/arrival')
     });
 });
 
+// get flights
+router.route('/flights')
+.get(function(req,res){ 
+        Aeroports.find({'flight': { $exists: true }}, function(err, aeroports) {
+        if (err)
+            res.send(err);
+        res.json(aeroports);
+    });
+});
 
 // get flight infos
 router.route('/flight/:flighttime/:destination/:flight/:boarding/:status')
