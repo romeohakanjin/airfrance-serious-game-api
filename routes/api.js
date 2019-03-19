@@ -239,11 +239,6 @@ router.route('/passenger/:last_name/:first_name')
     });
 });
 
-
-var temp = {
-1 : {b: 1},
-2: {b : 2}
-}
 // update passenger incident
 router.route('/passengerIncident/:reference_number')
 .get(function(req,res){ 
