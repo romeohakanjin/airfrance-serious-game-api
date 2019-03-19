@@ -239,10 +239,15 @@ router.route('/passenger/:last_name/:first_name')
     });
 });
 
+
+var temp = {
+1 : {b: 1},
+2: {b : 2}
+}
 // update passenger incident
 router.route('/passengerIncident/:reference_number')
 .get(function(req,res){ 
-        Aeroports.update({ reference_number : req.params.reference_number }, { "$set": {"flight.passenger.first_name" : "Violette" }}, function(err, aeroports) {
+        Aeroports.update({ reference_number : req.params.reference_number }, { "$set": {first_name : "Violette" }}, function(err, aeroports) {
         if (err)
             res.send(err);
         res.json(aeroports);
