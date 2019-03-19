@@ -239,25 +239,16 @@ router.route('/passenger/:last_name/:first_name')
     });
 });
 
-// set incident by reference_number, type_incident and description_incident
-// Recherche bien avec les paramètres saisi, mais retourne tout l'objet aeoport
+// update passenger incident
+var myquery = { flight.passenger.reference_number : "6974" };
+var newvalues = { $set: {first_name: "Violette" } };
 router.route('/passengerIncident/:reference_number')
 .get(function(req,res){ 
-    Aeroports.find({"flight.passenger.reference_number": req.params.reference_number}, function (err, aeroport) {
+        Aeroports.updateOne(myquery, newvalues, function(err, aeroports) {
         if (err)
             res.send(err);
-
-        Aeroports.flight.passenger.incident.type = req.params.type_incident;
-        Aeroports.flight.passenger.incident.description = req.params.description_incident;
-
-        // save the incident and check for errors
-        Aeroport.save(function (err, aeroport2) {
-            if (err)
-                res.json(err);
-            res.json(aeroport);
-        });
+        res.json(aeroports);
     });
-
 });
 
 
