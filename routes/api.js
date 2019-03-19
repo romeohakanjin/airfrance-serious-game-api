@@ -251,13 +251,12 @@ router.route('/passenger/:last_name/:first_name')
 // update passenger incident
 router.route('/passengerIncident/:reference_number')
 .get(function(req,res){ 
-        Aeroports.update({ reference_number : req.params.reference_number }, { "$set": {"flight.passenger.first_name" : "Violette" }}, function(err, aeroports) {
+        Aeroports.update({ reference_number : req.params.reference_number }, { $set: {"flight.passenger.first_name" : "Violette" }}, function(err, aeroports) {
         if (err)
             res.send(err);
         res.json(aeroports);
     });
 });
-
 
 // Recherche bien avec les paramètres saisi, mais retourne tout l'objet aeoport
 router.route('/passengerIncidentTest/:reference_number')
@@ -276,8 +275,8 @@ router.route('/passengerIncidentTest/:reference_number')
                 res.json(aeroport);
             });
         });
-
     });
+
 router.route('/getPAX/:reference_number')
     .get(function(req,res){
         Aeroports.find({"flight.passenger.reference_number": req.params.reference_number, "flight.num_flight": 548}, function (err, aeroport) {
