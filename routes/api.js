@@ -219,7 +219,7 @@ router.route('/flight/:numflight/pax/onboard/count')
 // Recherche bien avec le paramètre saisi, mais retourne tout l'objet aeoport
 router.route('/passengers/:num_flight')
 .get(function(req,res){ 
-        Aeroports.find({"flight.num_flight": req.params.num_flight, 'flight.passenger': {$exists: true}}, function(err, aeroports) {
+        Aeroports.find({"flight.num_flight": req.params.num_flight, 'flight.passenger.mail': {$exists: true}}, function(err, aeroports) {
         if (err)
             res.send(err);
         res.json(aeroports);
