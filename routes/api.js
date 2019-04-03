@@ -247,3 +247,6 @@ router.route('/passenger/:last_name/:first_name')
         res.json(aeroports);
     });
 });
+
+// Return router
+module.exports = router;
