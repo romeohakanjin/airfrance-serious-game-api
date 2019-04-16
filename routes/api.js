@@ -151,7 +151,6 @@ router.route('/flights/:destination/arrival')
 });
 
 // get flight by num_flight
-// Recherche bien avec le paramètre saisi, mais retourne tout l'objet aeoport
 router.route('/flight/:num_flight')
 .get(function(req,res){ 
         Aeroports.find({"flight.num_flight": req.params.num_flight, 'flight': {$exists: true}}, function(err, aeroports) {
